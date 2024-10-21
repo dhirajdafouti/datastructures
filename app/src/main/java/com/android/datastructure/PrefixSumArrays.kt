@@ -13,8 +13,13 @@ fun main() {
     }
 
     val reverseProgrammatically = reverseProgrammatically(nums)
-    for (i in reverseProgrammatically){
+    for (i in reverseProgrammatically) {
         println("Reverse Programmatically $i")
+    }
+    val nums2 = intArrayOf(2, 7, 11, 15)
+    val indices = sortedIndices(nums2, 18)
+    for (i in indices) {
+        println("Sorted Indices $i")
     }
 }
 
@@ -38,12 +43,12 @@ fun reverseArray(nums: IntArray): IntArray {
     return nums.reversedArray()
 }
 
-fun reverseProgrammatically(nums: IntArray):IntArray{
+fun reverseProgrammatically(nums: IntArray): IntArray {
     if (nums.isEmpty()) return intArrayOf()
     if (nums.size == 1) return nums
     var start = 0
     var end = nums.size - 1
-    while (start<end){
+    while (start < end) {
         val temp = nums[start]
         nums[start] = nums[end]
         nums[end] = temp
@@ -64,4 +69,28 @@ fun prefixSum(nums: IntArray, start: Int, end: Int): Int {
 
     }
     return sum
+}
+
+fun sortedIndices(nums: IntArray, target: Int): IntArray {
+
+    if (nums.isEmpty()) return intArrayOf()
+    if (nums.size == 1) return intArrayOf(nums[0])
+
+    var start = 0
+    var end = nums.size - 1
+    val indicesArray = IntArray(2)
+
+    while (start <= end) {
+        if (nums[start] + nums[end] == target) {
+            indicesArray[0] = start+1
+            indicesArray[1] = end+1
+            break
+        } else if (nums[start] + nums[end] < target) {
+            start++
+        } else {
+            end--
+        }
+
+    }
+    return indicesArray
 }
