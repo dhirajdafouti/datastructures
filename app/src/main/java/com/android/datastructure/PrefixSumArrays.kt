@@ -16,11 +16,12 @@ fun main() {
     for (i in reverseProgrammatically) {
         println("Reverse Programmatically $i")
     }
-    val nums2 = intArrayOf(2, 7, 11, 15)
+    val nums2 = intArrayOf(52, -91, 72)
     val indices = sortedIndices(nums2, 18)
     for (i in indices) {
         println("Sorted Indices $i")
     }
+    println(prefixSum3(nums2))
 }
 
 fun prefixSumRecursive(nums: IntArray, start: Int, end: Int): Int {
@@ -71,6 +72,17 @@ fun prefixSum(nums: IntArray, start: Int, end: Int): Int {
     return sum
 }
 
+fun prefixSum3(gain: IntArray): Int {
+    var maxGain = 0
+    var gained = 0
+    for (i in gain.indices) {
+        gained += gain[i]
+        maxGain = maxOf(maxGain, gained)
+    }
+    return maxGain
+}
+
+
 fun sortedIndices(nums: IntArray, target: Int): IntArray {
 
     if (nums.isEmpty()) return intArrayOf()
@@ -82,8 +94,8 @@ fun sortedIndices(nums: IntArray, target: Int): IntArray {
 
     while (start <= end) {
         if (nums[start] + nums[end] == target) {
-            indicesArray[0] = start+1
-            indicesArray[1] = end+1
+            indicesArray[0] = start + 1
+            indicesArray[1] = end + 1
             break
         } else if (nums[start] + nums[end] < target) {
             start++
